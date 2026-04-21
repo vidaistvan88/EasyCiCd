@@ -111,9 +111,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Define minimal API endpoints
-// app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
-//     .WithName("Health")
-//     .WithOpenApi()
-//     .WithDescription("Health check endpoint");
+app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
+    .WithName("Health")
+    .WithDescription("Health check endpoint");
 
 app.Run();
