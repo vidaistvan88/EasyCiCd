@@ -1,35 +1,30 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace EasyCiCd.Models;
 
 /// <summary>
 /// Represents a CI/CD pipeline configuration
 /// </summary>
-public class Pipeline
+public class Pipeline : BaseEntity
 {
     public int Id { get; set; }
-    
+
+    [Required]
+    [StringLength(255)]
     public string Name { get; set; } = string.Empty;
-    
+
+    [StringLength(1000)]
     public string? Description { get; set; }
-    
-    public string Repository { get; set; } = string.Empty;
-    
-    public string Branch { get; set; } = "main";
-    
-    public bool IsActive { get; set; } = true;
-    
-    public string TriggerEvent { get; set; } = "push"; // push, pull_request, manual
-    
-    // Audit fields
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    
-    public DateTime? UpdatedAt { get; set; }
-    
-    public string CreatedBy { get; set; } = "system";
-    
-    public string? UpdatedBy { get; set; }
-    
+
+    [Required]
+    [StringLength(50)]
+    public string Status { get; set; } = "draft"; // draft, active, inactive, archived
+
+    [Required]
+    public string UserId { get; set; } = string.Empty;
+
     // Navigation property
-    public ICollection<CiTask> Tasks { get; set; } = new List<CiTask>();
-    
-    public ICollection<Execution> Executions { get; set; } = new List<Execution>();
+    public ICollection<PipelineTask> Tasks { get; set; } = new List<PipelineTask>();
+
+    public ICollection<PipelineExecution> Executions { get; set; } = new List<PipelineExecution>();
 }

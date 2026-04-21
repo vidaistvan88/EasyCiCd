@@ -2,7 +2,7 @@ using EasyCiCd.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
-var builder = WebApplicationBuilder.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddDbContext<EasyCiCdDbContext>(options =>
@@ -111,9 +111,9 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Define minimal API endpoints
-app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
-    .WithName("Health")
-    .WithOpenApi()
-    .WithDescription("Health check endpoint");
+// app.MapGet("/api/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }))
+//     .WithName("Health")
+//     .WithOpenApi()
+//     .WithDescription("Health check endpoint");
 
 app.Run();
